@@ -9,5 +9,5 @@ class ProfileForm(ModelForm):
         widgets = {
             'image' : forms.FileInput(),
             'displayname' : forms.TextInput(attrs={'placeholder': 'Add to display name'}),
-            'info' : forms.Textarea(attrs={'rows':3,'palceholder':'Add information'})
+            'info' : forms.Textarea(attrs={'rows':3,'placeholder':'Add information'}),
         }                   

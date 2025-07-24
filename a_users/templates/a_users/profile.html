@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="max-w-lg mx-auto flex flex-col items-center pt-20 px-4">
-    <img class="w-36 h-36 rounded-full object-cover mb-4" src="{{ profile.avatar }}" />
+    <img class="w-36 h-36 rounded-full object-cover mb-4" src="{{ profile.avatar }}" alt />
     <div class="text-center">
         <h1>{{ profile.name }}</h1>
         <div class="text-gray-400 mb-2 -mt-3">@{{ profile.user.username }}</div>
@@ -14,3 +14,8 @@
 </div>
 
 {% endblock %}
+
+<!-- user
+name=Citrix(admin)->Citrix
+name=Tausif->@qwert65 
+name=jon->@5453rhjk -->
