@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+pillow = "*"
+django-allauth = "*"
+django-cleanup = "*"
+django-htmx = "*"
 
 [dev-packages]
 
