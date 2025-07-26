@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-pfbj_(7%7wjp*0fh#!am4$p91&8cr#=2u1ykusik+-eaoot4=d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','*']
 
 
 # Application definition
@@ -152,7 +152,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'        # You can make username optional if you wish
+ACCOUNT_EMAIL_VERIFICATION = 'optional'      # You can make username optional if you wish
 
 # Redirects user to this page after clicking the verification link
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login/' 

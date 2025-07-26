@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect ,get_object_or_404
 from django.urls import reverse
+from django.contrib.auth import logout
 from allauth.account.models import EmailAddress
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -14,8 +15,6 @@ def profile_view(request,username=None):
             profile = request.user.profile
         except:
             return redirect('account_login')   
-
-
     profile = request.user.profile
     return render(request, 'a_users/profile.html', {'profile':profile})
 
@@ -54,16 +53,30 @@ def profile_emailchange(request):
             if User.objects.filter(email=email).exclude(id=request.user.id).exists():
                 messages.warning(request, f'{email} is already in use')
                 return redirect('profile-settings')
-            
             form.save()
 
             # then Signal updates emailaddress and set  verified to False
-            EmailAddress.objects.add_email(request, request.user, request.user.email, confirm=True)
-            return redirect('profile-settings')
+            email_address = EmailAddress.objects.get(user=request.user, email=request.user.email)
+            email_address.send_confirmation(request)
+            messages.success(request, "A new verification email has been sent.")
         else:
             messages.warning(request,'Form is not valid')
             return redirect('profile-settings')
-
-
-    
     return redirect('home')
+
+@login_required
+def profile_emailverify(request):
+    email_address = EmailAddress.objects.get(user=request.user, email=request.user.email)
+    email_address.send_confirmation(request)
+    messages.success(request, "A new verification email has been sent.")
+    return redirect('profile-settings')
+
+@login_required
+def profile_delete_view(request):
+    user = request.user
+    if request.method =='POST':
+        logout(request)
+        user.delete()
+        messages.success(request,'Account Deleted, Good Bye')
+        return redirect('home')
+    return render(request,'a_users/profile_delete.html')
