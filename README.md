@@ -1,2 +1,2 @@
 # Django_Starter
-Allauth and htmx
+A Django starter boilerplate with user authentication
